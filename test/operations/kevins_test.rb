@@ -3,9 +3,10 @@ require "test_helper"
 class KevinsTest < Minitest::Spec
   class Create < Trailblazer::Operation
     class Present < Trailblazer::Operation
-      step :initialize
+      step :initialize_variable
 
-      def initialize(ctx, title:, **)
+      def initialize_variable(ctx, title:, **)
+        puts title.inspect
         title ||= "no title?"
       end
     end
@@ -23,7 +24,8 @@ class KevinsTest < Minitest::Spec
     end
 
     def show_name(ctx, name:, **)
-      puts name
+      puts name.inspect
+      puts ctx[:params][:name].inspect
       true
     end
   end
