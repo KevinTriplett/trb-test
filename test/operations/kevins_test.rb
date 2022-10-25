@@ -2,8 +2,8 @@ require "test_helper"
 
 class KevinsTest < Minitest::Spec
   class Create < Trailblazer::Operation
-    step :model #,
-    #  In() => [:title]
+    step :model,
+      In() => [:title]
 
     def model(ctx, title:, **)
       puts title.inspect
