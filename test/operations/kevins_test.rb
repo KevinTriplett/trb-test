@@ -7,7 +7,7 @@ class KevinsTest < Minitest::Spec
 
       def initialize_variable(ctx, title:, **)
         puts title.inspect
-        title ||= "no title?"
+        ctx[:title] ||= "no title?"
       end
     end
 
@@ -21,6 +21,7 @@ class KevinsTest < Minitest::Spec
       puts title.inspect
       puts ctx[:params].inspect
       ctx[:name] = title
+      true
     end
 
     def show_name(ctx, name:, **)
