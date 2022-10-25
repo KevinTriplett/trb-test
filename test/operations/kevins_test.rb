@@ -2,6 +2,15 @@ require "test_helper"
 
 class KevinsTest < Minitest::Spec
   class Create < Trailblazer::Operation
+    class Present < Trailblazer::Operation
+      step :initialize
+
+      def initialize(ctx, title:, **)
+        title ||= "no title?"
+      end
+    end
+
+    step Subprocess(Present)
     step :model,
       In() => [:title],
       Out() => [:name]
@@ -21,7 +30,7 @@ class KevinsTest < Minitest::Spec
 
   # Run without debugging:
   # result = Create.(params: {title: "Suggestion for democracy"})
-  result = Create.wtf?(title: "Suggestion for democracy", params: {name: "Joe Kid"})
+  result = Create.wtf?(title: nil, params: {name: "Joe Kid"})
 
 
 end
