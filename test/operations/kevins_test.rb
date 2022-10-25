@@ -13,8 +13,8 @@ class KevinsTest < Minitest::Spec
       ctx[:name] = title
     end
 
-    def show_name(ctx, **)
-      puts ctx[:name]
+    def show_name(ctx, name:, **)
+      puts name
       true
     end
   end
