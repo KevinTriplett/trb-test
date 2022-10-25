@@ -8,6 +8,7 @@ class KevinsTest < Minitest::Spec
     def model(ctx, title:, **)
       puts title.inspect
       puts ctx[:params].inspect
+      true
     end
   end
 
