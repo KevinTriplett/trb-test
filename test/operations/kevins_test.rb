@@ -14,7 +14,8 @@ class KevinsTest < Minitest::Spec
     class MyTransaction
       def self.call((ctx, flow_options), *, &block)
         signal, (ctx, flow_options) = yield
-        puts "got signal #{signal} with semantic = #{signal.semantic} and ctx #{ctx.to_h}"
+        puts "got signal #{signal} and ctx #{ctx.to_h}"
+        puts signal.to_h[:semantic].inspect
       rescue
         [ Trailblazer::Operation::Railway.fail!, [ctx, flow_options] ]
       end
