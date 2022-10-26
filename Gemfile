@@ -8,6 +8,7 @@ gem "rails", "~> 7.0.3", ">= 7.0.3.1"
 
 gem "trailblazer-operation" # Gives you Trailblazer::Operation, and that's it, no Reform.
 gem "trailblazer-developer" # Gives you #wtf?
+gem "trailblazer-macro" # operationb macros
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
