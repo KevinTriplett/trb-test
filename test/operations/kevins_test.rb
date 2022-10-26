@@ -24,7 +24,7 @@ class KevinsTest < Minitest::Spec
       In() => [:title],
       Out() => [:name]
     step :show_name
-    step WRAP( MyTransaction ) {
+    step Wrap( MyTransaction ) {
       step :update
       step :go_no_go
       step :are_we_still_here?
