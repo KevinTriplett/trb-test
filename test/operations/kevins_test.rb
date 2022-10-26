@@ -13,8 +13,8 @@ class KevinsTest < Minitest::Spec
 
     class MyTransaction
       def self.call((ctx, flow_options), *, &block)
-        returned_value = yield
-        puts "got: #{returned_value}"
+        signal, (ctx, flow_options) = yield
+        puts "got signal #{signal} with ctx #{ctx}"
       rescue
         [ Trailblazer::Operation::Railway.fail!, [ctx, flow_options] ]
       end
