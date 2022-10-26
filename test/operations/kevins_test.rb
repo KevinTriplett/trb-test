@@ -16,6 +16,13 @@ class KevinsTest < Minitest::Spec
       In() => [:title],
       Out() => [:name]
     step :show_name
+    step WRAP( MyTransaction ) {
+      step :update
+      step :go_no_go
+      step :are_we_still_here?
+    }
+    step :success
+    fail :log_error
 
     def model(ctx, title:, **)
       puts title.inspect
@@ -28,6 +35,39 @@ class KevinsTest < Minitest::Spec
       puts name.inspect
       puts ctx[:params][:name].inspect
       true
+    end
+
+    def update(ctx, **)
+      puts "look at me in update"
+      true
+    end
+
+    def go_no_go(ctx, **)
+      puts "oh no, let's abort"
+      ctx[:error_msg] = "this is bullshit, I can't work like this"
+      false
+    end
+
+    def are_we_still_here?(ctx, **)
+      puts "yay! we made it!"
+      true
+    end
+
+    def success(ctx, **)
+      puts "yay! it works"
+      true
+    end
+
+    def log_error(ctx, error_msg:, **)
+      puts error_msg
+    end
+
+    class MyTransaction
+      def self.call((ctx, flow_options), *, &block)
+        returned_value = yield
+      rescue
+        [ Trailblazer::Operation::Railway.fail!, [ctx, flow_options] ]
+      end
     end
   end
 
