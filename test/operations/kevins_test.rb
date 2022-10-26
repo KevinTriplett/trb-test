@@ -11,6 +11,14 @@ class KevinsTest < Minitest::Spec
       end
     end
 
+    class MyTransaction
+      def self.call((ctx, flow_options), *, &block)
+        returned_value = yield
+      rescue
+        [ Trailblazer::Operation::Railway.fail!, [ctx, flow_options] ]
+      end
+    end
+
     step Subprocess(Present)
     step :model,
       In() => [:title],
@@ -60,14 +68,6 @@ class KevinsTest < Minitest::Spec
 
     def log_error(ctx, error_msg:, **)
       puts error_msg
-    end
-
-    class MyTransaction
-      def self.call((ctx, flow_options), *, &block)
-        returned_value = yield
-      rescue
-        [ Trailblazer::Operation::Railway.fail!, [ctx, flow_options] ]
-      end
     end
   end
 
